@@ -1,6 +1,7 @@
 package config
 
 import (
+	"golang-todo-app/utils"
 	"log"
 
 	"gopkg.in/go-ini/ini.v1"
@@ -18,6 +19,7 @@ var Config ConfigList
 
 func init(){
 	LoadConfig()
+	utils.LoggingSetting(Config.LogFile)
 }
 
 func LoadConfig(){
@@ -29,6 +31,6 @@ func LoadConfig(){
 		Port: cfg.Section("web").Key("port").MustString("8080"),
 		SQLDriver: cfg.Section("db").Key("driver").String(),
 		DbName: cfg.Section("db").Key("name").String(),
-		LogFile: cfg.Section("web").Key("port").String(),
+		LogFile: cfg.Section("web").Key("logfile").String(),
 	}
 }
